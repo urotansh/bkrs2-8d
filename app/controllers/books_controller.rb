@@ -9,7 +9,14 @@ before_action :is_matching_login_user, only: [:edit, :update]
 
   def index
     @book = Book.new
-    @books = Book.all
+    if params[:order_updated_desc]
+      @books = Book.order_updated_desc
+    elsif params[:order_rate_desc]
+      @books = Book.order_rate_desc
+    else
+      @books = Book.all
+    end
+    
   end
 
   def create

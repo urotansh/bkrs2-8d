@@ -6,7 +6,10 @@ class Book < ApplicationRecord
 
   validates :title, presence: true
   validates :body, presence: true, length: { maximum: 200 }
-
+  
+  scope :order_updated_desc, -> { order(updated_at: :desc) }
+  scope :order_rate_desc, -> { order(rate: :desc) }
+  
   def favorited_by?(user)
     favorites.exists?(user_id: user.id)
   end
